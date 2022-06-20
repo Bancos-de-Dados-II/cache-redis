@@ -1,20 +1,32 @@
 const { response } = require('express');
-const res = require('express/lib/response');
 const Pessoa = require('../models/pessoa');
+const client = require('../database/redis');
 
 const buscarPessoa = async (request, response) =>{
     const email = request.params.email;
 
-    const pessoa = await Pessoa.findOne({where:{
-        email:email
-    }});
+    const resultado = await client.get(email);
 
-    if(pessoa == null){
-        response.status(200).send('Usuário não encontrado');
-    }else{
+    if(resultado!=null){
+        //Objeto está no Redis
+        const pessoa = JSON.parse(resultado);
         response.status(200).send(pessoa);
+    }else{
+        const pessoa = await Pessoa.findOne({where:{
+            email:email
+        }});
+    
+        if(pessoa == null){
+            //Objeto não está no redis nem no postgre
+            response.status(200).send('Usuário não encontrado');
+        }else{
+            //Atualiza o cache
+            await client.set(email, JSON.stringify(pessoa),{EX: 3600});
+            //Retorna o objeto
+            response.status(200).send(pessoa);
+        }
     }
-
+    
 };
 
 const getPessoas = async (request, response)=>{
