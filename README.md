@@ -1,6 +1,6 @@
 # api-express-sequelize
 
-Exemplo de API REST, com express e sequelize apresentado na disciplina de Bancos de Dados II, do Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas, do IFPB/campus Cajazeiras
+Exemplo de API REST, com express e sequelize apresentado na disciplina de Bancos de Dados II, do Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas, do IFPB/campus Cajazeiras. A API utiliza o redis como cache nos métodos de busca por e-mail com base na técnica de Lazy Load. Convém reforçar que o exemplo foi construído para ser didático, e pode/deve ser refatorado.
 
 ## Inicialização
 Para inicializar a API vocês deverão:
@@ -15,6 +15,8 @@ PG_USERNAME = postgres
 PG_PASSWORD = postgres
 PG_DATABASE = teste
 API_PORT = 3000
+REDIS_HOST = localhost
+REDIS_PORT = 6379
 ```
 
 3. ```npm i```
