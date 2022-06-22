@@ -15,15 +15,17 @@ PG_USERNAME = postgres
 PG_PASSWORD = postgres
 PG_DATABASE = teste
 API_PORT = 3000
-REDIS_HOST = localhost
-REDIS_PORT = 6379
+REDIS_HOST = {host do redis cloud}
+REDIS_PORT = {porta do redis cloud}
+REDIS_USER = {usuário, padrão: default}
+REDIS_PASSWORD = {senha do usuário}
 ```
 
 3. ```npm i```
 4. ```npm start```
 
 ## Alterar parâmetros
-Você pode alerar os dados da conexão do banco e da porta da API no arquivo .env
+Você deve alerar os dados da conexão do banco e da porta da API no arquivo .env para os dados do seu usuário. **Não esqueça de nunca deixar essas informações públicas, uma vez que esses dados podem ser utilizados por terceiros.**
 
 ## Uso
 Todos os comandos do uso do banco estão no arquivo index.js. É necessário realizar refatoração do código, pois foi feito de forma simples para facilitar na didática do exemplo.
